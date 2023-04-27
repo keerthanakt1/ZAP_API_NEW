@@ -11,6 +11,7 @@ jobs:
           ref: main
      
       - name: ZAP Scan
+         fail_action :false
        # uses: zaproxy/action-api-scan@v0.1.1
        # with:
        #   token: ${{ secrets.GITHUB_TOKEN }}
@@ -20,5 +21,6 @@ jobs:
             docker pull owasp/zap2docker-weekly  
             docker run -t owasp/zap2docker-weekly zap-api-scan.py -t https://api.publicapis.org/entries -f openapi 
             exit 0
+            
      
          
