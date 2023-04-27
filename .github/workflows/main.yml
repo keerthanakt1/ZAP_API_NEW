@@ -16,7 +16,6 @@ jobs:
        #   token: ${{ secrets.GITHUB_TOKEN }}
        
         run: |
-          script: |
             docker --version
             docker pull owasp/zap2docker-weekly  
             docker run -t owasp/zap2docker-weekly zap-api-scan.py -t https://api.publicapis.org/entries -f openapi 
