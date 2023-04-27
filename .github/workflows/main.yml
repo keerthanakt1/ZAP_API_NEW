@@ -1,0 +1,23 @@
+on: [push]
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the webapplication
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: ZAP Scan
+        uses: zaproxy/action-api-scan@v0.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+          script: |
+            docker pull owasp/zap2docker-weekly  
+            docker run -t owasp/zap2docker-weekly zap-api-scan.py -t https://api.publicapis.org/entries -f openapi 
+            exit 0
+     
+         
